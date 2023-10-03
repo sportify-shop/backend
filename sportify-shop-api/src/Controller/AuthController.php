@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/user', name: 'user')]
-class UserController extends AbstractController
+class AuthController extends AbstractController
 {
     
     public function index(): JsonResponse
