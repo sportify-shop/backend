@@ -16,6 +16,15 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+        
+        jwt_login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -41,3 +50,9 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+
+lexik_jwt_authentication:
+    secret_key:       '%env(APP_SECRET)%' # Your JWT secret key
+    public_key:       '%env(APP_PUBLIC_KEY)%' # Your JWT public key
+    pass_phrase:      '%env(APP_PASSPHRASE)%' # Your JWT pass phrase
+    token_ttl:        3600 # Token expiration time in seconds
