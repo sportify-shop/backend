@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Asserts;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,7 +20,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Asserts\NotBlank(message: 'Veuillez renseigner votre email')]
     private ?string $email = null;
+
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Asserts\NotBlank(message: 'Veuillez renseigner votre addresse')]
+    #[Asserts\Email(
+        message: "L'email {{ value }} n'est pas valide",
+    )]
+    private ?string $address = null;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -27,7 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Asserts\NotBlank()]
     private ?string $password = null;
 
     public function getId(): ?int
@@ -43,6 +53,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of address
+     */ 
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set the value of address
+     *
+     * @return  self
+     */ 
+    public function setAddress($address)
+    {
+        $this->address = $address;
 
         return $this;
     }
@@ -99,4 +129,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
 }
