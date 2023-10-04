@@ -3,16 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/products', name: 'product_')]
+#[Route('/product', name: 'product_')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
