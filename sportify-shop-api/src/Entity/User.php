@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Asserts;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -20,24 +23,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Asserts\NotBlank(message: 'Veuillez renseigner votre email')]
+    // #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
+    // #[Assert\Email(
+    //     message: "L'email {{ value }} n'est pas valide",
+    // )]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Asserts\NotBlank(message: 'Veuillez renseigner votre addresse')]
-    #[Asserts\Email(
-        message: "L'email {{ value }} n'est pas valide",
-    )]
+    #[ORM\Column(type: 'string')]
+    // #[Assert\NotBlank(message: 'Veuillez renseigner votre addresse')]
     private ?string $address = null;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
+    #[ORM\Column]
+    #[Assert\NotNull()]
+    private ?DateTimeImmutable $createdAt;
+
+    // #[ORM\Column]
+    // #[Assert\NotNull()]
+    // private ?DateTimeImmutable $updatedAt;
+
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private Collection $orders;
+
+    public function __construct()
+    {   
+        $this->createdAt = new DateTimeImmutable();
+        // $this->updatedAt = new DateTimeImmutable();
+        $this->orders = new ArrayCollection();
+    }
+
     /**
      * @var string The hashed password
      */
     #[ORM\Column(type: 'string', length: 255)]
-    #[Asserts\NotBlank()]
+    #[Assert\NotBlank()]
     private ?string $password = null;
 
     public function getId(): ?int
@@ -121,6 +142,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    // public function getUpdatedAt(): ?DateTimeImmutable
+    // {
+    //     return $this->updatedAt;
+    // }
+
+    // public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    // {
+    //     $this->updatedAt = $updatedAt;
+
+    //     return $this;
+    // }
+
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setUser($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeOrder(Order $order): self
+    {
+        $this->orders->removeElement($order);
+        
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -128,6 +196,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function __toString()
+    {
+        return $this->id;
     }
 
 }
