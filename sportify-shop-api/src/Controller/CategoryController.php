@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
 {
-
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(SerializerInterface $serializer, ManagerRegistry $doctrine): JsonResponse
     {
