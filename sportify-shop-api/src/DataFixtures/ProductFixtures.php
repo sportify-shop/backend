@@ -32,7 +32,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
                 ->setQuantity($faker->randomDigitNotNull())
                 ->setAvailability($faker->words(1, true))
                 ->setGender($genders[mt_rand(0, count($genders) - 1)])
-                ->setImageSlug($faker->imageUrl($width = 640, $height = 480));
+                ->setImageSlug($faker->imageUrl($width = 640, $height = 640));
                 
             $manager->persist($product);
             $products[] = $product;
