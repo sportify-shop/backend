@@ -53,61 +53,6 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-    public function findProductsByCategoryId(int $categoryId): array
-    {
-        $products = $this->createQueryBuilder('p')
-            ->andWhere('p.category = :category_id')
-            ->setParameter('category_id', $categoryId)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery();
-
-        return $products->getResult();
-    }
-
-    public function findProductsByCategoryName(string $categoryName): array
-    {
-        return $this->createQueryBuilder('p')
-            ->join('p.category', 'c')
-            ->andWhere('c.name = :name')
-            ->setParameter('name', $categoryName)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findProductsBySubCategoryId(int $subCategoryId): array
-    {
-        $products = $this->createQueryBuilder('p')
-            ->andWhere('p.subCategory = :sub_category_id')
-            ->setParameter('sub_category_id', $subCategoryId)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery();
-
-        return $products->getResult();
-    }
-
-    public function findProductsByGender(string $gender): array
-    {
-        $products = $this->createQueryBuilder('p')
-            ->where('p.gender = :gender')
-            ->setParameter('gender', $gender)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery();
-        return $products->getResult();
-            
-    }
-
-    public function findProductsByPrice(int $maxPrice): array
-    {
-        $products = $this->createQueryBuilder('p')
-            ->where('p.price < :price')
-            ->setParameter('price', $maxPrice)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery();
-        return $products->getResult();
-            
-    }
-
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
