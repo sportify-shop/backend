@@ -18,47 +18,47 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $name;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private ?string $description;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?float $price;
 
     #[ORM\Column]
-    private ?int $quantity = null;
+    private ?int $quantity;
 
     #[ORM\Column]
-    private ?bool $availability = null;
+    private ?bool $availability;
 
     #[ORM\Column(length: 255)]
-    private ?string $gender = null;
+    private ?string $gender;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $image_slug = null;
+    private ?string $image_slug;
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    private ?DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt;
 
     // #[ORM\Column]
     // #[Assert\NotNull()]
-    // private ?DateTimeImmutable $updatedAt = null;
+    // private ?DateTimeImmutable $updatedAt;
 
 
     // Bidirectional ManyToOne relationship with Category
     /** Many products have one category. This is the owning side. */
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy:'products')]
-    #[JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: true)]
-    private ?Category $category = null;
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy:'products', cascade: ['persist'])]
+    #[JoinColumn(name: 'category_id', referencedColumnName: 'id')]
+    private Category $category;
 
-    #[ORM\ManyToOne(targetEntity: SubCategory::class, inversedBy: 'products')]
-    #[JoinColumn(name: 'sub_category_id', referencedColumnName: 'id', nullable: true)]
-    private ?SubCategory $subCategory = null;
+    #[ORM\ManyToOne(targetEntity: SubCategory::class, inversedBy: 'products', cascade: ['persist'])]
+    #[JoinColumn(name: 'sub_category_id', referencedColumnName: 'id')]
+    private SubCategory $subCategory;
 
     #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'product')]
     private Collection $orderProducts;
