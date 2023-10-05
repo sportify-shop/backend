@@ -27,6 +27,7 @@ class ProductController extends AbstractController
         Request $request,
         SerializerInterface $serializer,
         ProductRepository $productRepository,
+        #[MapQueryParameter] ?string $name,
         #[MapQueryParameter] ?int $categoryId,
         #[MapQueryParameter] ?string $categoryName,
         #[MapQueryParameter] ?string $gender,
@@ -35,7 +36,7 @@ class ProductController extends AbstractController
     ): JsonResponse {
 
         try {
-            $products = $productRepository->findByQueryParameters($categoryId, $categoryName, $gender, $maxPrice, $orderBy);
+            $products = $productRepository->findByQueryParameters($name, $categoryId, $categoryName, $gender, $maxPrice, $orderBy);
     
             $data = [];
     
