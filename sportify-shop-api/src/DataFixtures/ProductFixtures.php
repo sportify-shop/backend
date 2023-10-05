@@ -5,14 +5,13 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
-use App\Repository\SubCategoryRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProductFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function __construct(private CategoryRepository $categoryRepository, private SubCategoryRepository $subCategoryRepository)
+    public function __construct(private CategoryRepository $categoryRepository)
     {
 
     }
@@ -40,14 +39,10 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $categories = $this->categoryRepository->findAll();
-        $subCategories = $this->subCategoryRepository->findAll();
     
         foreach ($products as $product) {
             $product->setCategory(
                 $categories[mt_rand(0, count($categories) - 1)]
-            );
-            $product->setSubCategory(
-                $subCategories[mt_rand(0, count($subCategories) - 1)]
             );
             $manager->persist($product);
         }
@@ -59,7 +54,6 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             CategoryFixtures::class,
-            SubCategoryFixtures::class
         ];
     }
 }

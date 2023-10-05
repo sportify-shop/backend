@@ -56,10 +56,6 @@ class Product
     #[JoinColumn(name: 'category_id', referencedColumnName: 'id')]
     private Category $category;
 
-    #[ORM\ManyToOne(targetEntity: SubCategory::class, inversedBy: 'products', cascade: ['persist'])]
-    #[JoinColumn(name: 'sub_category_id', referencedColumnName: 'id')]
-    private SubCategory $subCategory;
-
     #[ORM\OneToMany(targetEntity: OrderProduct::class, mappedBy: 'product')]
     private Collection $orderProducts;
 
@@ -191,18 +187,6 @@ class Product
     public function setCategory(Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
- 
-    public function getSubCategory(): ?SubCategory
-    {
-        return $this->subCategory;
-    }
-
-    public function setSubCategory(SubCategory $subCategory): self
-    {
-        $this->subCategory = $subCategory;
 
         return $this;
     }

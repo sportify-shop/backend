@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\SubCategory;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\SubCategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +20,8 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 class ProductController extends AbstractController
 {
     // INDEX PRODUCT + FILTERS
-    #[Route('/', name: 'index', methods: ['GET'])]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(
-        Request $request,
         SerializerInterface $serializer,
         ProductRepository $productRepository,
         #[MapQueryParameter] ?string $name,
@@ -53,7 +50,6 @@ class ProductController extends AbstractController
                     'gender' => $product->getGender(),
                     'image_slug' => $product->getImageSlug(),
                     'category_id' => $product->getCategory()->getId(),
-                    'sub_category_id' => $product->getSubCategory()->getId(),
                     'created_at' => $product->getCreatedAt()->format('Y-m-d H:i:s'),
                 ];
             }
@@ -90,8 +86,8 @@ class ProductController extends AbstractController
     }
 
     // NEW PRODUCT
-    #[Route('/', name: 'new', methods: ['POST'])]
-    public function new(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, SerializerInterface $serializer, ValidatorInterface $validator): Response
+    #[Route('', name: 'new', methods: ['POST'])]
+    public function new(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SerializerInterface $serializer, ValidatorInterface $validator): Response
     {
         $productData = $request->getContent();
         
@@ -112,13 +108,11 @@ class ProductController extends AbstractController
             $jsonData = json_decode($productData, true);
             
             $categoryId = $jsonData['category'];
-            $subCategoryId = $jsonData['subCategory'];
 
             $category = $categoryRepository->find($categoryId);
-            $subCategory = $subCategoryRepository->find($subCategoryId);
 
             
-            $productRepository->save($product, $category, $subCategory, true);
+            $productRepository->save($product, $category, true);
 
             return new Response(null, 201); // Created status code
 

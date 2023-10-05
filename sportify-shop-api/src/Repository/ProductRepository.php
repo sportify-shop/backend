@@ -22,16 +22,14 @@ use Doctrine\ORM\Query\AST\Subselect;
 class ProductRepository extends ServiceEntityRepository
 {
     private $categoryRepository;
-    private $subCategoryRepository;
 
-    public function __construct(ManagerRegistry $registry, SubCategoryRepository $subCategoryRepository, CategoryRepository $categoryRepository)
+    public function __construct(ManagerRegistry $registry, CategoryRepository $categoryRepository)
     {
         $this->categoryRepository;
-        $this->subCategoryRepository;
         parent::__construct($registry, Product::class);
     }
 
-    public function save($entity, $category, $subCategory, bool $flush = false): void
+    public function save($entity, $category, bool $flush = false): void
     {
         $product = New Product();
 
@@ -43,8 +41,7 @@ class ProductRepository extends ServiceEntityRepository
             ->setAvailability($availability)
             ->setGender($entity->getGender())
             ->setImageSlug($entity->getImageSlug())
-            ->setCategory($category)
-            ->setSubCategory($subCategory);
+            ->setCategory($category);
         
         $this->getEntityManager()->persist($product);
             
@@ -64,8 +61,8 @@ class ProductRepository extends ServiceEntityRepository
                 ->join('p.category', 'c');
 
         if ($name !== null) {
-            $qb->andWhere('p.name = :name')
-                ->setParameter('name', trim($name));
+            $qb->andWhere($qb->expr()->like('p.name', ':name'))
+                ->setParameter('name', '%' . trim($name) . '%');
         } 
 
         if ($categoryId !== null) {
