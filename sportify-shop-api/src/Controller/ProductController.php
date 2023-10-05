@@ -31,11 +31,11 @@ class ProductController extends AbstractController
         #[MapQueryParameter] ?string $categoryName,
         #[MapQueryParameter] ?string $gender,
         #[MapQueryParameter] ?int $maxPrice,
-        // #[MapQueryParameter] ?string $orderBy
+        #[MapQueryParameter] ?string $orderBy
     ): JsonResponse {
 
         try {
-            $products = $productRepository->findByQueryParameters($categoryId, $categoryName, $gender, $maxPrice);
+            $products = $productRepository->findByQueryParameters($categoryId, $categoryName, $gender, $maxPrice, $orderBy);
     
             $data = [];
     

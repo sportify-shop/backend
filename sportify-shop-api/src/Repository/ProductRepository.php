@@ -111,7 +111,7 @@ class ProductRepository extends ServiceEntityRepository
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
-   public function findByQueryParameters($categoryId = null, $categoryName = null, $gender = null, $maxPrice = null): array
+   public function findByQueryParameters($categoryId = null, $categoryName = null, $gender = null, $maxPrice = null, $orderBy = 'ASC'): array
    {
 
         $qb = $this->createQueryBuilder('p')
@@ -135,7 +135,8 @@ class ProductRepository extends ServiceEntityRepository
 
         if ($maxPrice !== null) {
             $qb->andWhere('p.price < :price')
-                ->setParameter('price', $maxPrice);
+                ->setParameter('price', $maxPrice)
+                ->orderBy('p.price', $orderBy);
         }
         
         return $qb->getQuery()->getResult();
