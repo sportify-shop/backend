@@ -6,19 +6,19 @@ use App\Entity\Product;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 
 #[Route('/product', name: 'product_')]
 class ProductController extends AbstractController
 {
+
     // INDEX PRODUCT + FILTERS
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(
@@ -78,6 +78,7 @@ class ProductController extends AbstractController
             'id' => $product->getId(),
             'name' => $product->getName(),
             'description' => $product->getDescription(),
+            'imageSlug' => $product->getImageSlug(),
         ];
 
         $json = $serializer->serialize($data, 'json');
@@ -90,7 +91,6 @@ class ProductController extends AbstractController
     public function new(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository, SerializerInterface $serializer, ValidatorInterface $validator): Response
     {
         $productData = $request->getContent();
-        
         try {
             $product = $serializer->deserialize($productData, Product::class, 'json');
             
@@ -109,10 +109,106 @@ class ProductController extends AbstractController
             
             $categoryId = $jsonData['category'];
 
+            if ($categoryId === 1) {
+                $path = 'images/products/Chaussures.jpg';
+            }
+
+            if ($categoryId === 2) {
+                $path = 'images/products/T-shirts.jpg';
+            }
+
+            if ($categoryId === 3) {
+                $path = 'images/products/Shorts.jpg';
+            }
+
+            if ($categoryId === 4) {
+                $path = 'images/products/Pantalons.jpg';
+            }
+
+            if ($categoryId === 5) {
+                $path = 'images/products/Sweat & Pulls.jpg';
+            }
+
+            if ($categoryId === 6) {
+                $path = 'images/products/Survêtements.jpg';
+            }
+
+            if ($categoryId === 7) {
+                $path = 'images/products/Maillots de Bain.jpg';
+            }
+
+            if ($categoryId === 8) {
+                $path = 'images/products/Polos.jpg';
+            }
+
+            if ($categoryId === 9) {
+                $path = 'images/products/Chaussettes.jpg';
+            }
+
+            if ($categoryId === 10) {
+                $path = 'images/products/Vestes.jpg';
+            }
+
+            if ($categoryId === 11) {
+                $path = 'images/products/Débardeurs.jpg';
+            }
+
+            if ($categoryId === 12) {
+                $path = 'images/products/Doudounes.jpg';
+            }
+
+            if ($categoryId === 13) {
+                $path = 'images/products/Leggings et Collants.jpg';
+            }
+
+            if ($categoryId === 14) {
+                $path = 'images/products/Peignoirs.jpg';
+            }
+
+            if ($categoryId === 15) {
+                $path = 'images/products/Montres.jpg';
+            }
+
+            if ($categoryId === 16) {
+                $path = 'images/products/Sac à Dos.jpg';
+            }
+
+            if ($categoryId === 17) {
+                $path = 'images/products/Gants.jpg';
+            }
+
+            if ($categoryId === 18) {
+                $path = 'images/products/Bonnets.jpg';
+            }
+
+            if ($categoryId === 19) {
+                $path = 'images/products/Casquettes.jpg';
+            }
+
+            if ($categoryId === 20) {
+                $path = 'images/products/Lunettes de Soleil.jpg';
+            }
+
+            if ($categoryId === 21) {
+                $path = 'images/products/Bandeaux et Tour de cou.jpg';
+            }
+
+            if ($categoryId === 22) {
+                $path = 'images/products/Robes.jpg';
+            }
+
+            if ($categoryId === 23) {
+                $path = 'images/products/Brassières.jpg';
+            }
+
+            if ($categoryId === 24) {
+                $path = 'images/products/Jupes.jpg';
+            }
+
             $category = $categoryRepository->find($categoryId);
 
             
-            $productRepository->save($product, $category, true);
+            $productRepository->save($product, $path, $category, true);
 
             return new Response(null, 201); // Created status code
 

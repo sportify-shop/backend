@@ -29,7 +29,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function save($entity, $category, bool $flush = false): void
+    public function save($entity, $path, $category, bool $flush = false): void
     {
         $product = New Product();
 
@@ -40,7 +40,7 @@ class ProductRepository extends ServiceEntityRepository
             ->setQuantity($entity->getQuantity())
             ->setAvailability($availability)
             ->setGender($entity->getGender())
-            ->setImageSlug($entity->getImageSlug())
+            ->setImageSlug($path)
             ->setCategory($category);
         
         $this->getEntityManager()->persist($product);
