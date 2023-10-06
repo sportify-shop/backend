@@ -74,29 +74,129 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             'MegaThrust X1',
         ];
 
+        $categories = $this->categoryRepository->findAll();
+
+
         for ($i=0; $i < 50; $i++) {
             $product = new Product();
             foreach ($products as $product) {
                 $product->setName($names[$i]);
-            }    
+            }
+                
             $product->setDescription($faker->words(40, true)) 
-                ->setPrice($faker->randomDigitNotNull())
+                ->setPrice(number_format(rand(999, 9999) / 100, 2))
                 ->setQuantity($faker->randomDigitNotNull())
                 ->setAvailability($faker->words(1, true))
                 ->setGender($genders[mt_rand(0, count($genders) - 1)])
-                ->setImageSlug($faker->imageUrl($width = 640, $height = 640));
-                
+                ;                
             $manager->persist($product);
             $products[] = $product;
             
         }
 
-        $categories = $this->categoryRepository->findAll();
+        
     
         foreach ($products as $product) {
             $product->setCategory(
                 $categories[mt_rand(0, count($categories) - 1)]
             );
+
+                if ($product->getCategory()->getId() === 1) {
+                    $product->setImageSlug('images/products/Chaussures.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 2) {
+                    $product->setImageSlug('images/products/T-shirts.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 3) {
+                    $product->setImageSlug('images/products/Shorts.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 4) {
+                    $product->setImageSlug('images/products/Pantalons.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 5) {
+                    $product->setImageSlug('images/products/Sweat & Pulls.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 6) {
+                    $product->setImageSlug('images/products/Survêtements.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 7) {
+                    $product->setImageSlug('images/products/Maillots de Bain.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 8) {
+                    $product->setImageSlug('images/products/Polos.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 9) {
+                    $product->setImageSlug('images/products/Chaussettes.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 10) {
+                    $product->setImageSlug('images/products/Vestes.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 11) {
+                    $product->setImageSlug('images/products/Débardeurs.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 12) {
+                    $product->setImageSlug('images/products/Doudounes.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 13) {
+                    $product->setImageSlug('images/products/Leggings et Collants.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 14) {
+                    $product->setImageSlug('images/products/Peignoirs.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 15) {
+                    $product->setImageSlug('images/products/Montres.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 16) {
+                    $product->setImageSlug('images/products/Sac à Dos.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 17) {
+                    $product->setImageSlug('images/products/Gants.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 18) {
+                    $product->setImageSlug('images/products/Bonnets.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 19) {
+                    $product->setImageSlug('images/products/Casquettes.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 20) {
+                    $product->setImageSlug('images/products/Lunettes de Soleil.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 21) {
+                    $product->setImageSlug('images/products/Bandeaux et Tour de cou.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 22) {
+                    $product->setImageSlug('images/products/Robes.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 23) {
+                    $product->setImageSlug('images/products/Brassières.jpg');
+                }
+    
+                if ($product->getCategory()->getId() === 24) {
+                    $product->setImageSlug('images/products/Jupes.jpg');
+                }
+    
             $manager->persist($product);
         }
 
