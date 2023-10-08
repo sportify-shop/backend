@@ -14,29 +14,6 @@ To reach our goal we developped a sportify-shop website in two distinguished app
   ![Miro](https://img.shields.io/badge/Miro-F7C922?style=for-the-badge&logo=Miro&logoColor=050036) ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white) ![Obsidian](https://img.shields.io/badge/Obsidian-483699?style=for-the-badge&logo=Obsidian&logoColor=white) ![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)
 
 ## Quick Start
-### Frontend 
-
-You can clone the frontend repository starting by :
-
-```
-git clone git@github.com:sportify-shop/frontend.git
-```
-
-open the project : 
-``` php
-cd sportify-shop-app/
-```
-
-Use Yarn to install the project's dependencies into vendor 
-
-``` php
-yarn install
-```
-
-Then you can start the Front server bt running : 
-``` powershell
-npm run dev
-```
 ### Backend
 
 At first, you must verify if you have all the requirements needed to run a symfony project on your computer : 
