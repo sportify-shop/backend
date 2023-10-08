@@ -106,6 +106,8 @@ Stay tunes.
 
 ## Authors Details 
 
-@[Ericcost](https://github.com/Ericcost)
-@[Ludovic](https://github.com/ludovic-sbr)
-@[Hugo](https://github.com/Zeleph75)
+[@Ericcost](https://github.com/Ericcost)
+
+[@Ludovic](https://github.com/ludovic-sbr)
+
+[@Hugo](https://github.com/Zeleph75)
