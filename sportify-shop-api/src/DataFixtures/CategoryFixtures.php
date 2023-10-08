@@ -13,7 +13,8 @@ class CategoryFixtures extends Fixture
     {
         
         $faker = Factory::create('fr_FR');
-        $categories = ['Chaussures', 'T-shirts', 'Shorts', 'Pantalons', 'Sweats & Pulls', 'Survêtements', 'Maillots de Bain', 'Polos', 'Chaussettes', 'Vestes', 'Débardeurs', 'Doudounes', 'Leggings et Collants', 'Peignoirs', 'Montres', 'Sac à Dos', 'Gants', 'Bonnets', 'Casquettes', 'Lunettes de Soleil', 'Bandeaux et Tour du cou', 'Robes', 'Brassières', 'Jupes'];
+
+        $categories = ['Chaussures', 'T-shirts', 'Shorts', 'Pantalons', 'Sweats', 'Survêtements', 'Maillots', 'Polos', 'Chaussettes', 'Vestes', 'Débardeurs', 'Doudounes', 'Leggings et Collants', 'Peignoirs', 'Montres', 'Sacs', 'Gants', 'Bonnets', 'Casquettes', 'Lunettes', 'Bandeaux', 'Robes', 'Brassières', 'Jupes'];
 
         for ($i=0; $i < 24; $i++) {
             $category = new Category();
