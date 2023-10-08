@@ -47,37 +47,12 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             'BlazeJet 500',
             'MegaFlex Pro',
             'LunarGlide 2000',
-            'FireStorm Inferno',
-            'RocketWave X1',
-            'SpeedWing Pro',
-            'PowerStreak 9000',
-            'TurboRider X',
-            'GlideFire 3000',
-            'AquaRocket Pro',
-            'TerraSpeed X1',
-            'SkySailor 5000',
-            'AeroFlash Elite',
-            'NitroWave 360',
-            'ZeroGravity Glide',
-            'TidalForce Pro',
-            'FusionRider X1',
-            'SonicGlide 2000',
-            'JetStream Inferno',
-            'BlitzRunner X',
-            'WaveMaster 3000',
-            'SpeedDiver Pro',
-            'ThunderJet 9000',
-            'AeroBlitz X',
-            'GravitySurfer 5000',
-            'SolarWing Elite',
-            'HydroCharge 360',
-            'MegaThrust X1',
         ];
 
         $categories = $this->categoryRepository->findAll();
 
 
-        for ($i=0; $i < 50; $i++) {
+        for ($i=0; $i < 25; $i++) {
             $product = new Product();
             $product->setName($names[$i]);
             
@@ -101,99 +76,99 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             );
 
                 if ($product->getCategory()->getId() === 1) {
-                    $product->setImageSlug('images/products/Chaussures.jpg');
+                    $product->setImageSlug('Chaussures.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 2) {
-                    $product->setImageSlug('images/products/T-shirts.jpg');
+                    $product->setImageSlug('T-shirts.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 3) {
-                    $product->setImageSlug('images/products/Shorts.jpg');
+                    $product->setImageSlug('Shorts.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 4) {
-                    $product->setImageSlug('images/products/Pantalons.jpg');
+                    $product->setImageSlug('Pantalons.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 5) {
-                    $product->setImageSlug('images/products/Sweat & Pulls.jpg');
+                    $product->setImageSlug('Sweats.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 6) {
-                    $product->setImageSlug('images/products/Survêtements.jpg');
+                    $product->setImageSlug('Survêtements.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 7) {
-                    $product->setImageSlug('images/products/Maillots de Bain.jpg');
+                    $product->setImageSlug('Maillots.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 8) {
-                    $product->setImageSlug('images/products/Polos.jpg');
+                    $product->setImageSlug('Polos.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 9) {
-                    $product->setImageSlug('images/products/Chaussettes.jpg');
+                    $product->setImageSlug('Chaussettes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 10) {
-                    $product->setImageSlug('images/products/Vestes.jpg');
+                    $product->setImageSlug('Vestes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 11) {
-                    $product->setImageSlug('images/products/Débardeurs.jpg');
+                    $product->setImageSlug('Débardeurs.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 12) {
-                    $product->setImageSlug('images/products/Doudounes.jpg');
+                    $product->setImageSlug('Doudounes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 13) {
-                    $product->setImageSlug('images/products/Leggings et Collants.jpg');
+                    $product->setImageSlug('Leggings.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 14) {
-                    $product->setImageSlug('images/products/Peignoirs.jpg');
+                    $product->setImageSlug('Peignoirs.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 15) {
-                    $product->setImageSlug('images/products/Montres.jpg');
+                    $product->setImageSlug('Montres.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 16) {
-                    $product->setImageSlug('images/products/Sac à Dos.jpg');
+                    $product->setImageSlug('Sacs.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 17) {
-                    $product->setImageSlug('images/products/Gants.jpg');
+                    $product->setImageSlug('Gants.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 18) {
-                    $product->setImageSlug('images/products/Bonnets.jpg');
+                    $product->setImageSlug('Bonnets.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 19) {
-                    $product->setImageSlug('images/products/Casquettes.jpg');
+                    $product->setImageSlug('Casquettes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 20) {
-                    $product->setImageSlug('images/products/Lunettes de Soleil.jpg');
+                    $product->setImageSlug('Lunettes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 21) {
-                    $product->setImageSlug('images/products/Bandeaux et Tour de cou.jpg');
+                    $product->setImageSlug('Bandeaux.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 22) {
-                    $product->setImageSlug('images/products/Robes.jpg');
+                    $product->setImageSlug('Robes.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 23) {
-                    $product->setImageSlug('images/products/Brassières.jpg');
+                    $product->setImageSlug('Brassières.jpg');
                 }
     
                 if ($product->getCategory()->getId() === 24) {
-                    $product->setImageSlug('images/products/Jupes.jpg');
+                    $product->setImageSlug('Jupes.jpg');
                 }
     
             $manager->persist($product);
